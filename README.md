@@ -8,7 +8,7 @@
 4. Start the server with `npm start`.
 5. Open `http://localhost:3000`.
 
-The SQLite database is created at `data/stmarys.sqlite`. Uploaded event flyers are stored in `uploads/`.
+The SQLite database is created at `data/stmarys.sqlite`.
 
 The first owner admin is `emmyjstunt@gmail.com`. Create a member account with that email first; the server then grants it owner admin access. Other people must create member accounts before the owner can add their emails under Admin access.
 
@@ -20,11 +20,11 @@ The current SQLite setup is suitable for one small deployment. For multiple serv
 
 ## Chosen hosting setup
 
-The first production target is Render with a persistent disk mounted at `/var/data`. Render should set:
+The no-card testing target is Render's free web service. Render should set:
 
 ```text
-STMARY_DATA_DIR=/var/data/data
-STMARY_UPLOAD_DIR=/var/data/uploads
+STMARY_DATA_DIR=/tmp/stmarys-data
+STMARY_UPLOAD_DIR=/tmp/stmarys-uploads
 ```
 
-This keeps the SQLite database and flyers after redeploys. Keep the service on one instance while using SQLite. A later growth upgrade can move SQL to PostgreSQL and flyers to object storage.
+The free service can sleep and its local SQLite database may reset after a restart, so it is for testing only. Events automatically disappear from the public site 24 hours after their scheduled date and time. Upgrade to persistent SQL storage when the church needs reliable accounts.

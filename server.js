@@ -121,11 +121,11 @@ app.post("/api/auth/login", async (request, response) => {
 app.post("/api/auth/logout", (request, response) => { response.clearCookie("stmarys_auth"); response.status(204).end(); });
 app.get("/api/auth/me", requireAuth, (request, response) => response.json({ user: publicUser(request.user) }));
 
-app.get("/api/events", async (request, response) => { response.json({ events: await all("SELECT id, name, date, time, location, flyer_url AS flyerUrl FROM events ORDER BY date, time") }); });
-app.post("/api/events", requireAuth, requireAdmin, upload.single("flyer"), async (request, response) => {
+app.get("/api/events", async (request, response) => { response.json({ events: await all("SELECT id, name, date, time, location FROM events WHERE datetime(date || ' ' || time, '+24 hours') > datetime('now') ORDER BY date, time") }); });
+app.post("/api/events", requireAuth, requireAdmin, async (request, response) => {
   const { name, date, time, location } = request.body;
   if (!name || !date || !time || !location) return response.status(400).json({ error: "Event name, date, time, and location are required." });
-  const result = await run("INSERT INTO events (name, date, time, location, flyer_url, created_by) VALUES (?, ?, ?, ?, ?, ?)", [name.trim(), date, time, location.trim(), request.file ? `/uploads/${request.file.filename}` : "", request.user.id]);
+  const result = await run("INSERT INTO events (name, date, time, location, created_by) VALUES (?, ?, ?, ?, ?)", [name.trim(), date, time, location.trim(), request.user.id]);
   response.status(201).json({ id: result.id });
 });
 app.delete("/api/events/:id", requireAuth, requireAdmin, async (request, response) => { await run("DELETE FROM events WHERE id = ?", [request.params.id]); response.status(204).end(); });

@@ -169,8 +169,7 @@
 				const day = new Intl.DateTimeFormat("en-NG", { day: "2-digit" }).format(date);
 				const month = new Intl.DateTimeFormat("en-NG", { month: "short" }).format(date);
 				const time = new Intl.DateTimeFormat("en-NG", { hour: "numeric", minute: "2-digit" }).format(new Date(`1970-01-01T${event.time}`));
-				const flyer = event.flyerUrl ? `<a href="${event.flyerUrl}" target="_blank" rel="noopener">View flyer</a>` : "";
-				return `<article class="event"><div class="event-date"><b>${day}</b><span>${month}</span></div><div><h3>${escapePublicEvent(event.name)}</h3><p>${escapePublicEvent(event.location)} &middot; ${time}</p>${flyer}</div><span class="event-arrow">&rarr;</span></article>`;
+				return `<article class="event"><div class="event-date"><b>${day}</b><span>${month}</span></div><div><h3>${escapePublicEvent(event.name)}</h3><p>${escapePublicEvent(event.location)} &middot; ${time}</p></div><span class="event-arrow">&rarr;</span></article>`;
 			}).join("");
 			} else {
 			publicEventList.innerHTML = '<div class="event-empty">Upcoming events will appear here soon.</div>';

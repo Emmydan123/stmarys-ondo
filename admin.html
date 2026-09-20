@@ -42,7 +42,6 @@
     .event-item { border: 1px solid var(--line); padding: 16px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
     .event-item h3 { margin: 0 0 4px; font-size: 17px; }
     .event-item p { color: var(--muted); font-size: 13px; margin: 0; }
-    .event-item img { display: block; width: 72px; height: 52px; object-fit: cover; margin-top: 9px; border-radius: 2px; }
     .event-actions { display: flex; gap: 7px; flex-shrink: 0; }
     .delete { color: #a33e37; background: #fae7e3; }
     .empty { color: var(--muted); border: 1px dashed var(--line); padding: 24px; text-align: center; font-size: 14px; }
@@ -72,8 +71,6 @@
           <div class="form-row"><div><label for="event-date">Date</label><input id="event-date" type="date" required /></div><div><label for="event-time">Time</label><input id="event-time" type="time" required /></div></div>
           <label for="event-location">Location</label>
           <input id="event-location" required placeholder="e.g. Main church auditorium" />
-          <label for="event-flyer">Event flyer <span>(optional)</span></label>
-          <input id="event-flyer" type="file" accept="image/*" />
           <button class="primary" type="submit" id="save-button">Add event</button>
           <button class="secondary" type="button" id="cancel-button" hidden>Cancel editing</button>
         </form>
@@ -89,7 +86,7 @@
     const formTitle = document.querySelector("#form-title");
     const saveButton = document.querySelector("#save-button");
     const cancelButton = document.querySelector("#cancel-button");
-    const fields = { name: document.querySelector("#event-name"), date: document.querySelector("#event-date"), time: document.querySelector("#event-time"), location: document.querySelector("#event-location"), flyer: document.querySelector("#event-flyer") };
+    const fields = { name: document.querySelector("#event-name"), date: document.querySelector("#event-date"), time: document.querySelector("#event-time"), location: document.querySelector("#event-location") };
     const adminForm = document.querySelector("#admin-form");
     const adminEmail = document.querySelector("#admin-email");
     const adminList = document.querySelector("#admin-list");
@@ -98,10 +95,10 @@
     function formatTime(time) { return new Intl.DateTimeFormat("en-NG", { hour: "numeric", minute: "2-digit" }).format(new Date(`1970-01-01T${time}`)); }
     function resetForm() { form.reset(); formTitle.textContent = "Add an event"; saveButton.textContent = "Add event"; cancelButton.hidden = true; }
     function escapeHtml(value) { return value.replace(/[&<>'"]/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", "\"": "&quot;" })[character]); }
-    function renderEvents() { eventList.innerHTML = events.length ? events.map(event => `<article class="event-item"><div><h3>${escapeHtml(event.name)}</h3><p>${formatDate(event.date)} &middot; ${formatTime(event.time)}<br>${escapeHtml(event.location)}</p>${event.flyerUrl ? `<img src="${event.flyerUrl}" alt="Event flyer" />` : ""}</div><div class="event-actions"><button class="secondary edit" data-id="${event.id}" type="button">Edit</button><button class="delete remove" data-id="${event.id}" type="button">Delete</button></div></article>`).join("") : '<div class="empty">No events added yet.</div>'; }
+    function renderEvents() { eventList.innerHTML = events.length ? events.map(event => `<article class="event-item"><div><h3>${escapeHtml(event.name)}</h3><p>${formatDate(event.date)} &middot; ${formatTime(event.time)}<br>${escapeHtml(event.location)}</p></div><div class="event-actions"><button class="delete remove" data-id="${event.id}" type="button">Delete</button></div></article>`).join("") : '<div class="empty">No active events. Events disappear 24 hours after their scheduled time.</div>'; }
     function renderAdmins(admins) { adminList.innerHTML = admins.map(admin => `<div class="admin-row"><div class="admin-email">${escapeHtml(admin.email)}${admin.email === "emmyjstunt@gmail.com" ? '<div class="owner-label">Owner</div>' : ""}</div>${admin.email === "emmyjstunt@gmail.com" ? "" : `<button class="remove-admin" type="button" data-admin="${encodeURIComponent(admin.email)}">Remove</button>`}</div>`).join(""); }
     async function loadAdminData() { const auth = await fetch("/api/auth/me"); if (!auth.ok) { window.location.href = "account.html"; return; } const current = await auth.json(); if (!current.user.isAdmin) { document.querySelector("main").innerHTML = '<div class="panel"><h1>Admin access required</h1><p class="intro">Your account is not an administrator.</p></div>'; return; } const [eventResponse, adminResponse] = await Promise.all([fetch("/api/events"), fetch("/api/admins")]); events = (await eventResponse.json()).events || []; renderEvents(); renderAdmins((await adminResponse.json()).admins || []); }
-    form.addEventListener("submit", async event => { event.preventDefault(); const body = new FormData(); body.append("name", fields.name.value.trim()); body.append("date", fields.date.value); body.append("time", fields.time.value); body.append("location", fields.location.value.trim()); if (fields.flyer.files[0]) body.append("flyer", fields.flyer.files[0]); const response = await fetch("/api/events", { method: "POST", body }); if (!response.ok) { alert((await response.json()).error || "Unable to add event."); return; } resetForm(); loadAdminData(); });
+    form.addEventListener("submit", async event => { event.preventDefault(); const body = { name: fields.name.value.trim(), date: fields.date.value, time: fields.time.value, location: fields.location.value.trim() }; const response = await fetch("/api/events", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }); if (!response.ok) { alert((await response.json()).error || "Unable to add event."); return; } resetForm(); loadAdminData(); });
     cancelButton.addEventListener("click", resetForm);
     eventList.addEventListener("click", async event => { const id = event.target.dataset.id; if (!id) return; if (event.target.classList.contains("remove")) { await fetch(`/api/events/${id}`, { method: "DELETE" }); loadAdminData(); } });
     adminForm.addEventListener("submit", async event => { event.preventDefault(); const response = await fetch("/api/admins", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: adminEmail.value.trim() }) }); const data = await response.json(); if (!response.ok) { alert(data.error); return; } adminEmail.value = ""; loadAdminData(); });
