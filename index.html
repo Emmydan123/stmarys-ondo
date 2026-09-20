@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="St. Mary's Anglican Church, Ondo. Jesus is Lord and love is real." />
+	<meta name="theme-color" content="#103438" />
+	<title>St. Mary's Anglican Church, Ondo | Jesus Is Lord</title>
+	<link rel="manifest" href="manifest.webmanifest" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+	<style>
+		:root {
+			--ink: #173f43;
+			--deep: #103438;
+			--cream: #faf7f1;
+			--paper: #fffdf9;
+			--coral: #e5795f;
+			--gold: #e5b866;
+			--sage: #c7d7c6;
+			--muted: #61706d;
+			--line: #dfe7df;
+			--shadow: 0 20px 55px rgba(16, 52, 56, 0.11);
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body { margin: 0; background: var(--cream); color: var(--ink); font-family: "DM Sans", sans-serif; line-height: 1.5; }
+		a { color: inherit; text-decoration: none; }
+		.container { width: min(1120px, calc(100% - 40px)); margin: auto; }
+
+		nav { height: 78px; display: flex; align-items: center; justify-content: space-between; }
+		.brand { display: flex; align-items: center; gap: 11px; font-weight: 700; letter-spacing: .02em; }
+		.brand-logo { width: 42px; height: 42px; object-fit: contain; border-radius: 50%; background: white; }
+		.nav-links { display: flex; align-items: center; gap: 29px; font-size: 14px; font-weight: 500; }
+		.nav-links a:hover { color: var(--coral); }
+		.account-link { display: inline-flex; align-items: center; gap: 7px; }
+		.nav-avatar { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; background: white; }
+		.nav-cta { padding: 11px 18px; border: 1px solid var(--ink); border-radius: 4px; }
+		.menu-button { display: none; background: none; border: 0; color: var(--ink); font-size: 24px; }
+
+		.hero { padding: 46px 0 93px; position: relative; overflow: hidden; }
+		.hero-grid { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 64px; }
+		.eyebrow { color: var(--coral); font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+		h1, h2 { font-family: "Playfair Display", Georgia, serif; line-height: 1.08; margin: 0; }
+		h1 { font-size: clamp(48px, 6vw, 76px); letter-spacing: -.04em; margin: 18px 0 23px; max-width: 520px; }
+		.hero-copy { color: var(--muted); font-size: 17px; max-width: 430px; margin-bottom: 29px; }
+		.button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: 0; border-radius: 4px; padding: 14px 21px; font: 700 14px "DM Sans", sans-serif; cursor: pointer; transition: transform .2s, background .2s; }
+		.button:hover { transform: translateY(-2px); }
+		.button-primary { background: var(--coral); color: white; }
+		.button-primary:hover { background: #d96850; }
+		.button-light { background: white; color: var(--ink); box-shadow: 0 4px 15px rgba(16,52,56,.12); }
+		.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+		.hero-image { position: relative; }
+		.hero-image img { display: block; width: 100%; height: 490px; object-fit: contain; background: white; padding: 22px; border-radius: 50% 50% 5px 5px; box-shadow: var(--shadow); }
+		.service-card { position: absolute; left: -30px; bottom: 26px; padding: 19px 23px; background: var(--paper); box-shadow: var(--shadow); border-left: 4px solid var(--gold); }
+		.service-card small { color: var(--muted); font-size: 12px; }
+		.service-card strong { display: block; margin-top: 3px; font-size: 17px; }
+
+		.highlight { background: var(--deep); color: white; padding: 27px 0; }
+		.highlight-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+		.highlight p { margin: 0; color: #d5e1db; font-size: 15px; }
+		.highlight strong { color: var(--gold); margin-right: 10px; }
+		.highlight .button { background: var(--gold); color: var(--deep); white-space: nowrap; }
+
+		section { padding: 93px 0; }
+		.section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 36px; }
+		h2 { font-size: clamp(35px, 4vw, 50px); letter-spacing: -.03em; }
+		.section-heading p { max-width: 330px; color: var(--muted); margin: 0; }
+		.programs { background: var(--paper); }
+		.program-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+		.program { border: 1px solid var(--line); padding: 28px; min-height: 210px; display: flex; flex-direction: column; justify-content: space-between; transition: border-color .2s, transform .2s; }
+		.program:hover { border-color: var(--coral); transform: translateY(-4px); }
+		.program-top { display: flex; justify-content: space-between; align-items: flex-start; }
+		.program-icon { font-size: 27px; }
+		.program-day { color: var(--coral); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+		.program h3 { font: 700 23px "Playfair Display", Georgia, serif; margin: 13px 0 5px; }
+		.program p { color: var(--muted); margin: 0; font-size: 14px; }
+		.program-time { border-top: 1px solid var(--line); padding-top: 14px; font-size: 13px; font-weight: 700; }
+
+		.events { background: var(--sage); }
+		.event-list { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+		.event { background: var(--paper); display: grid; grid-template-columns: 84px 1fr auto; align-items: center; gap: 18px; padding: 20px; }
+		.event-empty { background: rgba(255,255,255,.45); border: 1px dashed rgba(23,63,67,.28); color: var(--muted); padding: 24px; text-align: center; font-size: 14px; }
+		.event-date { text-align: center; border-right: 1px solid var(--line); padding-right: 18px; }
+		.event-date b { display: block; font: 700 32px "Playfair Display", Georgia, serif; line-height: 1; }
+		.event-date span { color: var(--coral); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+		.event h3 { margin: 0 0 4px; font-size: 17px; }
+		.event p { margin: 0; color: var(--muted); font-size: 13px; }
+		.event-arrow { color: var(--coral); font-size: 24px; }
+
+		.welcome { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+		.welcome img { width: 100%; height: 390px; object-fit: cover; border-radius: 4px; }
+		.welcome h2 { margin: 14px 0 18px; }
+		.welcome p { color: var(--muted); max-width: 470px; }
+		.quote { margin-top: 28px; border-left: 3px solid var(--gold); padding-left: 17px; font: italic 18px "Playfair Display", Georgia, serif; }
+
+		footer { background: var(--deep); color: white; padding: 48px 0 24px; }
+		.footer-top { display: flex; align-items: start; justify-content: space-between; gap: 40px; padding-bottom: 42px; }
+		footer .brand { color: white; }
+		footer p { color: #b9cbc4; max-width: 280px; font-size: 14px; }
+		.footer-links { display: flex; gap: 40px; font-size: 14px; }
+		.footer-links a:hover { color: var(--gold); }
+		.footer-bottom { border-top: 1px solid rgba(255,255,255,.15); padding-top: 20px; color: #91aaa1; font-size: 12px; }
+		@media (max-width: 760px) {
+			.container { width: min(100% - 30px, 560px); }
+			nav { height: 68px; }
+			.menu-button { display: block; }
+			.nav-links { display: none; }
+			.hero { padding: 30px 0 70px; }
+			.hero-grid, .welcome { grid-template-columns: 1fr; gap: 40px; }
+			h1 { font-size: 51px; }
+			.hero-image img { height: 350px; }
+			.service-card { left: 12px; bottom: -18px; }
+			.highlight-inner, .section-heading, .footer-top { align-items: flex-start; flex-direction: column; }
+			section { padding: 65px 0; }
+			.program-grid, .event-list { grid-template-columns: 1fr; }
+			.welcome { gap: 28px; }
+			.welcome img { height: 300px; }
+			.footer-links { gap: 20px; flex-wrap: wrap; }
+		}
+	</style>
+</head>
+<body>
+	<header class="container">
+		<nav aria-label="Main navigation">
+			<a class="brand" href="#top"><img class="brand-logo" src="image.png" alt="St. Mary's Anglican Church logo" /> ST. MARY'S</a>
+			<div class="nav-links">
+				<a href="#programs">Programs</a><a href="#events">Events</a><a href="#about">About us</a><a class="account-link" href="account.html">Log in</a><a class="nav-cta" href="#visit">Plan a visit</a>
+			</div>
+			<button class="menu-button" aria-label="Open menu">&#9776;</button>
+		</nav>
+	</header>
+
+	<main id="top">
+		<section class="hero">
+			<div class="container hero-grid">
+				<div>
+					<div class="eyebrow">A place to belong</div>
+					<h1>Jesus is Lord. Love is real.</h1>
+					<p class="hero-copy">Welcome to St. Mary's Anglican Church, Ondo, a church family where faith is lived, Christ is honoured, and everyone is welcome.</p>
+					<div class="hero-actions"><a class="button button-primary" href="#visit">Join us this Sunday <span>&rarr;</span></a><a class="button button-light" href="#programs">See our programs</a></div>
+				</div>
+				<div class="hero-image"><img src="image.png" alt="St. Mary's Anglican Church logo" /><div class="service-card"><small>THIS SUNDAY</small><strong>Sunday service at 9:00 AM</strong></div></div>
+			</div>
+		</section>
+
+		<div class="highlight"><div class="container highlight-inner"><p><strong>LIVE THIS SUNDAY</strong> Follow Sunday programs and special events on TikTok.</p><a class="button" href="https://www.tiktok.com/@st_mary12345" target="_blank" rel="noopener">Watch live <span>&#9654;</span></a></div></div>
+
+		<section class="programs" id="programs"><div class="container"><div class="section-heading"><h2>Worship, pray,<br />and grow.</h2><p>Join us for worship on Sunday and for prayer and Bible study during the week.</p></div><div class="program-grid">
+			<article class="program"><div><div class="program-top"><span class="program-icon">&#9733;</span><span class="program-day">Sunday</span></div><h3>Sunday Service</h3><p>Worship, teaching, and a warm welcome for the whole family.</p></div><div class="program-time">9:00 AM</div></article>
+			<article class="program"><div><div class="program-top"><span class="program-icon">&#9825;</span><span class="program-day">Wednesday</span></div><h3>Bible Study</h3><p>Come together to study God's word and grow in faith.</p></div><div class="program-time">5:00 PM</div></article>
+			<article class="program"><div><div class="program-top"><span class="program-icon">&#9670;</span><span class="program-day">Tuesday</span></div><h3>Prayer Warriors</h3><p>A dedicated time of prayer for the church, families, and our community.</p></div><div class="program-time">4:00 PM</div></article>
+		</div></div></section>
+
+		<section class="events" id="events"><div class="container"><div class="section-heading"><h2>Save the date.</h2><p>Small moments become meaningful memories when we share them together.</p></div><div class="event-list" id="public-event-list"></div></div></section>
+
+		<section id="about"><div class="container welcome"><img src="image.png" alt="St. Mary's Anglican Church logo" /><div><div class="eyebrow">You belong here</div><h2>A welcoming church family in Ondo.</h2><p>St. Mary's Anglican Church is a place where Jesus is Lord and love is real. Find us in Surulere, opposite the Correctional Centre, Ondo City.</p><div class="quote">“Jesus is Lord.”</div></div></div></section>
+	</main>
+
+	<footer id="visit"><div class="container"><div class="footer-top"><div><a class="brand" href="#top"><img class="brand-logo" src="image.png" alt="St. Mary's Anglican Church logo" /> ST. MARY'S</a><p>Surulere, opposite the Correctional Centre, Ondo City.<br /><a href="tel:07039301377">07039301377</a></p></div><div class="footer-links"><a href="tel:07039301377">Call us</a><a href="https://www.tiktok.com/@st_mary12345" target="_blank" rel="noopener">TikTok</a><a href="https://maps.google.com/?q=Surulere+Opposite+Correctional+Centre+Ondo" target="_blank" rel="noopener">Get directions</a></div></div><div class="footer-bottom">&copy; 2026 St. Mary's Anglican Church, Ondo. Everyone is welcome.</div></div></footer>
+	<script>
+		const publicEventList = document.querySelector("#public-event-list");
+		function renderPublicEvents(publicEvents) {
+			if (publicEvents.length) {
+			publicEventList.innerHTML = publicEvents.map(event => {
+				const date = new Date(`${event.date}T00:00:00`);
+				const day = new Intl.DateTimeFormat("en-NG", { day: "2-digit" }).format(date);
+				const month = new Intl.DateTimeFormat("en-NG", { month: "short" }).format(date);
+				const time = new Intl.DateTimeFormat("en-NG", { hour: "numeric", minute: "2-digit" }).format(new Date(`1970-01-01T${event.time}`));
+				const flyer = event.flyerUrl ? `<a href="${event.flyerUrl}" target="_blank" rel="noopener">View flyer</a>` : "";
+				return `<article class="event"><div class="event-date"><b>${day}</b><span>${month}</span></div><div><h3>${escapePublicEvent(event.name)}</h3><p>${escapePublicEvent(event.location)} &middot; ${time}</p>${flyer}</div><span class="event-arrow">&rarr;</span></article>`;
+			}).join("");
+			} else {
+			publicEventList.innerHTML = '<div class="event-empty">Upcoming events will appear here soon.</div>';
+			}
+		}
+		function escapePublicEvent(value) { return value.replace(/[&<>'"]/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", "\"": "&quot;" })[character]); }
+		fetch("/api/events").then(response => response.json()).then(data => renderPublicEvents(data.events || [])).catch(() => renderPublicEvents([]));
+		fetch("/api/auth/me").then(response => response.ok ? response.json() : null).then(data => { if (data && data.user) { const accountLink = document.querySelector(".account-link"); accountLink.innerHTML = `<img class="nav-avatar" src="${data.user.photoUrl || "image.png"}" alt="${escapePublicEvent(data.user.name || "Member")}" /> <span>${escapePublicEvent(data.user.name || "Member")}</span>`; } }).catch(() => {});
+		if ("serviceWorker" in navigator) { navigator.serviceWorker.register("service-worker.js").catch(() => {}); }
+	</script>
+</body>
+</html>

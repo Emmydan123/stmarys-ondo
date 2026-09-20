@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sign in or create an account for St. Mary's Anglican Church, Ondo." />
+  <meta name="theme-color" content="#103438" />
+  <title>Account | St. Mary's Anglican Church, Ondo</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --ink: #173f43; --deep: #103438; --cream: #faf7f1; --paper: #fffdf9; --coral: #e5795f; --gold: #e5b866; --muted: #61706d; --line: #dfe7df; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: var(--cream); color: var(--ink); font-family: "DM Sans", sans-serif; }
+    a { color: inherit; text-decoration: none; }
+    .page { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+    .welcome { background: var(--deep); color: white; padding: 40px clamp(30px, 7vw, 100px); display: flex; flex-direction: column; justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 700; letter-spacing: .02em; }
+    .brand-logo { width: 38px; height: 38px; object-fit: contain; border-radius: 50%; background: white; }
+    .welcome-copy { max-width: 440px; }
+    h1, h2 { font-family: "Playfair Display", Georgia, serif; line-height: 1.08; }
+    h1 { font-size: clamp(44px, 6vw, 72px); letter-spacing: -.04em; margin: 20px 0; }
+    .welcome p { color: #c6d8d0; font-size: 17px; max-width: 360px; }
+    .welcome-note { color: var(--gold); font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .form-side { display: grid; place-items: center; padding: 40px 25px; }
+    .form-box { width: min(100%, 405px); }
+    .switcher { display: flex; gap: 23px; border-bottom: 1px solid var(--line); margin-bottom: 32px; }
+    .switch { color: var(--muted); background: none; border: 0; border-bottom: 2px solid transparent; border-radius: 0; padding: 0 0 13px; font-size: 15px; cursor: pointer; }
+    .switch.active { color: var(--ink); border-color: var(--coral); font-weight: 700; }
+    h2 { font-size: 32px; margin: 0 0 9px; }
+    .form-intro { color: var(--muted); margin: 0 0 25px; font-size: 14px; }
+    label { color: var(--muted); display: block; font-size: 13px; font-weight: 700; margin: 16px 0 7px; }
+    input { width: 100%; background: white; border: 1px solid var(--line); border-radius: 3px; color: var(--ink); font: 15px "DM Sans", sans-serif; padding: 13px; }
+    input:focus { outline: 2px solid rgba(229,121,95,.35); border-color: var(--coral); }
+    .photo-label { margin-top: 16px; }
+    .photo-input { padding: 10px; }
+    .submit { background: var(--coral); border: 0; border-radius: 3px; color: white; cursor: pointer; font: 700 14px "DM Sans", sans-serif; margin-top: 25px; padding: 14px; width: 100%; }
+    .submit:hover { background: #d96850; }
+    .message { min-height: 22px; color: var(--coral); font-size: 13px; margin: 15px 0 0; }
+    .back { color: var(--muted); display: inline-block; font-size: 13px; margin-top: 24px; }
+    .back:hover { color: var(--coral); }
+    @media (max-width: 700px) { .page { grid-template-columns: 1fr; } .welcome { min-height: 330px; padding: 25px; } .welcome-copy { margin: 45px 0 10px; } h1 { font-size: 48px; } .form-side { padding: 55px 25px 70px; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="welcome"><a class="brand" href="index.html"><img class="brand-logo" src="image.png" alt="St. Mary's Anglican Church logo" /> ST. MARY'S</a><div class="welcome-copy"><div class="welcome-note">A place to belong</div><h1>Stay connected to your church family.</h1><p>Sign in to keep up with events, programs, and the life of St. Mary's Anglican Church, Ondo.</p></div><a href="index.html">&larr; Back to the public website</a></section>
+    <main class="form-side"><div class="form-box"><div class="switcher"><button class="switch active" type="button" data-mode="login">Log in</button><button class="switch" type="button" data-mode="signup">Create account</button></div><h2 id="form-title">Welcome back.</h2><p class="form-intro" id="form-intro">Log in to your church account.</p><form id="account-form"><div id="name-field" hidden><label for="name">Full name</label><input id="name" autocomplete="name" /><label class="photo-label" for="photo">Profile picture (optional)</label><input class="photo-input" id="photo" type="file" accept="image/*" /></div><label for="email">Email address</label><input id="email" type="email" required autocomplete="email" placeholder="you@example.com" /><label for="password">Password</label><input id="password" type="password" required minlength="6" autocomplete="current-password" placeholder="At least 6 characters" /><button class="submit" id="submit-button" type="submit">Log in</button><p class="message" id="message" role="status"></p></form><a class="back" href="index.html">Continue without an account &rarr;</a></div></main>
+  </div>
+  <script>
+    const accountForm = document.querySelector("#account-form");
+    const modeButtons = document.querySelectorAll(".switch");
+    const nameField = document.querySelector("#name-field");
+    const nameInput = document.querySelector("#name");
+    const photoInput = document.querySelector("#photo");
+    const formTitle = document.querySelector("#form-title");
+    const formIntro = document.querySelector("#form-intro");
+    const submitButton = document.querySelector("#submit-button");
+    const message = document.querySelector("#message");
+    let mode = "login";
+    modeButtons.forEach(button => button.addEventListener("click", () => { mode = button.dataset.mode; modeButtons.forEach(item => item.classList.toggle("active", item === button)); const signup = mode === "signup"; nameField.hidden = !signup; nameInput.required = signup; formTitle.textContent = signup ? "Welcome in." : "Welcome back."; formIntro.textContent = signup ? "Create an account for church updates." : "Log in to your church account."; submitButton.textContent = signup ? "Create account" : "Log in"; message.textContent = ""; }));
+    accountForm.addEventListener("submit", async event => { event.preventDefault(); message.textContent = ""; const email = document.querySelector("#email").value.trim().toLowerCase(); const password = document.querySelector("#password").value; const endpoint = mode === "signup" ? "/api/auth/signup" : "/api/auth/login"; const options = { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: nameInput.value.trim(), email, password }) }; if (mode === "signup" && photoInput.files[0]) { const formData = new FormData(); formData.append("name", nameInput.value.trim()); formData.append("email", email); formData.append("password", password); formData.append("photo", photoInput.files[0]); options.body = formData; delete options.headers; } try { const result = await fetch(endpoint, options); const data = await result.json(); if (!result.ok) throw new Error(data.error); message.textContent = mode === "signup" ? "Your account was created. You are signed in." : `Welcome, ${data.user.name || "friend"}.`; if (result.ok) setTimeout(() => { window.location.href = "index.html"; }, 500); } catch (error) { message.textContent = error.message; } });
+    if ("serviceWorker" in navigator) { navigator.serviceWorker.register("service-worker.js").catch(() => {}); }
+  </script>
+</body>
+</html>

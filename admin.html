@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="St. Mary's Anglican Church, Ondo event administration." />
+  <meta name="theme-color" content="#103438" />
+  <title>Event Admin | St. Mary's Anglican Church, Ondo</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --ink: #173f43; --deep: #103438; --cream: #faf7f1; --paper: #fffdf9; --coral: #e5795f; --gold: #e5b866; --muted: #61706d; --line: #dfe7df; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--cream); color: var(--ink); font-family: "DM Sans", sans-serif; }
+    .container { width: min(100% - 40px, 1060px); margin: auto; }
+    header { background: var(--deep); color: white; padding: 22px 0; }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 11px; color: white; font-weight: 700; letter-spacing: .02em; }
+    .brand-logo { width: 38px; height: 38px; object-fit: contain; border-radius: 50%; background: white; }
+    .mark { width: 34px; height: 34px; display: grid; place-items: center; background: var(--coral); color: white; border-radius: 50% 50% 50% 8px; transform: rotate(-45deg); font-family: Georgia, serif; font-size: 21px; }
+    .mark span { transform: rotate(45deg); }
+    .back-link { color: #d5e1db; font-size: 14px; }
+    main { padding: 58px 0 80px; }
+    .eyebrow { color: var(--coral); font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    h1, h2 { font-family: "Playfair Display", Georgia, serif; line-height: 1.08; }
+    h1 { font-size: clamp(38px, 5vw, 58px); margin: 14px 0 12px; }
+    .intro { color: var(--muted); margin: 0 0 34px; }
+    .layout { display: grid; grid-template-columns: 1fr 1.15fr; gap: 24px; align-items: start; }
+    .panel { background: var(--paper); border: 1px solid var(--line); padding: 27px; }
+    h2 { font-size: 28px; margin: 0 0 22px; }
+    label { display: block; color: var(--muted); font-size: 13px; font-weight: 700; margin: 15px 0 7px; }
+    input { width: 100%; border: 1px solid var(--line); border-radius: 3px; background: white; color: var(--ink); font: 15px "DM Sans", sans-serif; padding: 12px; }
+    input:focus { outline: 2px solid rgba(229,121,95,.35); border-color: var(--coral); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    button { border: 0; border-radius: 3px; cursor: pointer; font: 700 14px "DM Sans", sans-serif; padding: 13px 17px; }
+    .primary { background: var(--coral); color: white; margin-top: 22px; width: 100%; }
+    .primary:hover { background: #d96850; }
+    .secondary { background: var(--line); color: var(--ink); }
+    .event-list { display: grid; gap: 12px; }
+    .event-item { border: 1px solid var(--line); padding: 16px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .event-item h3 { margin: 0 0 4px; font-size: 17px; }
+    .event-item p { color: var(--muted); font-size: 13px; margin: 0; }
+    .event-item img { display: block; width: 72px; height: 52px; object-fit: cover; margin-top: 9px; border-radius: 2px; }
+    .event-actions { display: flex; gap: 7px; flex-shrink: 0; }
+    .delete { color: #a33e37; background: #fae7e3; }
+    .empty { color: var(--muted); border: 1px dashed var(--line); padding: 24px; text-align: center; font-size: 14px; }
+    .notice { color: var(--muted); font-size: 12px; margin-top: 16px; }
+    .admin-panel { margin-top: 24px; }
+    .admin-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid var(--line); padding: 13px 0; }
+    .admin-row:first-child { border-top: 0; }
+    .admin-email { font-size: 14px; }
+    .owner-label { color: var(--coral); font-size: 11px; font-weight: 700; text-transform: uppercase; }
+    .remove-admin { color: #a33e37; background: #fae7e3; padding: 8px 11px; }
+    @media (max-width: 760px) { .container { width: min(100% - 30px, 560px); } .layout { grid-template-columns: 1fr; } .event-item { align-items: flex-start; flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <header><div class="container nav"><a class="brand" href="index.html"><img class="brand-logo" src="image.png" alt="St. Mary's Anglican Church logo" /> ST. MARY'S</a><a class="back-link" href="index.html">View public website &rarr;</a></div></header>
+  <main class="container">
+    <div class="eyebrow">Church administration</div>
+    <h1>Upcoming events</h1>
+    <p class="intro">Add the events you want the St. Mary's Anglican Church, Ondo community to see on the public website.</p>
+    <div class="layout">
+      <section class="panel">
+        <h2 id="form-title">Add an event</h2>
+        <form id="event-form">
+          <input id="event-id" type="hidden" />
+          <label for="event-name">Event name</label>
+          <input id="event-name" required placeholder="e.g. Harvest Thanksgiving" />
+          <div class="form-row"><div><label for="event-date">Date</label><input id="event-date" type="date" required /></div><div><label for="event-time">Time</label><input id="event-time" type="time" required /></div></div>
+          <label for="event-location">Location</label>
+          <input id="event-location" required placeholder="e.g. Main church auditorium" />
+          <label for="event-flyer">Event flyer <span>(optional)</span></label>
+          <input id="event-flyer" type="file" accept="image/*" />
+          <button class="primary" type="submit" id="save-button">Add event</button>
+          <button class="secondary" type="button" id="cancel-button" hidden>Cancel editing</button>
+        </form>
+        <p class="notice">Events are currently saved in this browser. A proper shared admin system will require a database and hosting.</p>
+      </section>
+      <section class="panel"><h2>Published events</h2><div class="event-list" id="event-list"></div></section>
+    </div>
+    <section class="panel admin-panel"><h2>Admin access</h2><p class="notice">The owner can add trusted email addresses that should have admin access.</p><form id="admin-form"><label for="admin-email">Add admin email</label><input id="admin-email" type="email" required placeholder="another-admin@example.com" /><button class="primary" type="submit">Add admin</button></form><div id="admin-list" class="event-list"></div></section>
+  </main>
+  <script>
+    const form = document.querySelector("#event-form");
+    const eventList = document.querySelector("#event-list");
+    const formTitle = document.querySelector("#form-title");
+    const saveButton = document.querySelector("#save-button");
+    const cancelButton = document.querySelector("#cancel-button");
+    const fields = { name: document.querySelector("#event-name"), date: document.querySelector("#event-date"), time: document.querySelector("#event-time"), location: document.querySelector("#event-location"), flyer: document.querySelector("#event-flyer") };
+    const adminForm = document.querySelector("#admin-form");
+    const adminEmail = document.querySelector("#admin-email");
+    const adminList = document.querySelector("#admin-list");
+    let events = [];
+    function formatDate(date) { return new Intl.DateTimeFormat("en-NG", { day: "2-digit", month: "short", year: "numeric" }).format(new Date(`${date}T00:00:00`)); }
+    function formatTime(time) { return new Intl.DateTimeFormat("en-NG", { hour: "numeric", minute: "2-digit" }).format(new Date(`1970-01-01T${time}`)); }
+    function resetForm() { form.reset(); formTitle.textContent = "Add an event"; saveButton.textContent = "Add event"; cancelButton.hidden = true; }
+    function escapeHtml(value) { return value.replace(/[&<>'"]/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", "\"": "&quot;" })[character]); }
+    function renderEvents() { eventList.innerHTML = events.length ? events.map(event => `<article class="event-item"><div><h3>${escapeHtml(event.name)}</h3><p>${formatDate(event.date)} &middot; ${formatTime(event.time)}<br>${escapeHtml(event.location)}</p>${event.flyerUrl ? `<img src="${event.flyerUrl}" alt="Event flyer" />` : ""}</div><div class="event-actions"><button class="secondary edit" data-id="${event.id}" type="button">Edit</button><button class="delete remove" data-id="${event.id}" type="button">Delete</button></div></article>`).join("") : '<div class="empty">No events added yet.</div>'; }
+    function renderAdmins(admins) { adminList.innerHTML = admins.map(admin => `<div class="admin-row"><div class="admin-email">${escapeHtml(admin.email)}${admin.email === "emmyjstunt@gmail.com" ? '<div class="owner-label">Owner</div>' : ""}</div>${admin.email === "emmyjstunt@gmail.com" ? "" : `<button class="remove-admin" type="button" data-admin="${encodeURIComponent(admin.email)}">Remove</button>`}</div>`).join(""); }
+    async function loadAdminData() { const auth = await fetch("/api/auth/me"); if (!auth.ok) { window.location.href = "account.html"; return; } const current = await auth.json(); if (!current.user.isAdmin) { document.querySelector("main").innerHTML = '<div class="panel"><h1>Admin access required</h1><p class="intro">Your account is not an administrator.</p></div>'; return; } const [eventResponse, adminResponse] = await Promise.all([fetch("/api/events"), fetch("/api/admins")]); events = (await eventResponse.json()).events || []; renderEvents(); renderAdmins((await adminResponse.json()).admins || []); }
+    form.addEventListener("submit", async event => { event.preventDefault(); const body = new FormData(); body.append("name", fields.name.value.trim()); body.append("date", fields.date.value); body.append("time", fields.time.value); body.append("location", fields.location.value.trim()); if (fields.flyer.files[0]) body.append("flyer", fields.flyer.files[0]); const response = await fetch("/api/events", { method: "POST", body }); if (!response.ok) { alert((await response.json()).error || "Unable to add event."); return; } resetForm(); loadAdminData(); });
+    cancelButton.addEventListener("click", resetForm);
+    eventList.addEventListener("click", async event => { const id = event.target.dataset.id; if (!id) return; if (event.target.classList.contains("remove")) { await fetch(`/api/events/${id}`, { method: "DELETE" }); loadAdminData(); } });
+    adminForm.addEventListener("submit", async event => { event.preventDefault(); const response = await fetch("/api/admins", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: adminEmail.value.trim() }) }); const data = await response.json(); if (!response.ok) { alert(data.error); return; } adminEmail.value = ""; loadAdminData(); });
+    adminList.addEventListener("click", async event => { const email = event.target.dataset.admin; if (email) { await fetch(`/api/admins/${email}`, { method: "DELETE" }); loadAdminData(); } });
+    loadAdminData().catch(() => { document.querySelector("main").innerHTML = '<div class="panel"><h1>Server unavailable</h1><p class="intro">Start the Node server, then reload this page.</p></div>'; });
+    if ("serviceWorker" in navigator) { navigator.serviceWorker.register("service-worker.js").catch(() => {}); }
+  </script>
+</body>
+</html>

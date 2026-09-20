@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: stmarys-ondo
+    runtime: node
+    plan: starter
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/events
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: STMARY_DATA_DIR
+        value: /var/data/data
+      - key: STMARY_UPLOAD_DIR
+        value: /var/data/uploads
+    disk:
+      name: stmarys-data
+      mountPath: /var/data
+      sizeGB: 1

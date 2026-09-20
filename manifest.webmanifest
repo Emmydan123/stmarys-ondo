@@ -1,0 +1,24 @@
+{
+  "name": "St. Mary's Anglican Church, Ondo",
+  "short_name": "St. Mary's Ondo",
+  "description": "St. Mary's Anglican Church, Ondo. Jesus is Lord and love is real.",
+  "start_url": "index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#faf7f1",
+  "theme_color": "#103438",
+  "icons": [
+    {
+      "src": "image.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "image.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
