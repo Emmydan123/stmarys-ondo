@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">St. Mary\'s Anglican Church, Ondo</string>
+    <string name="title_activity_main">St. Mary\'s Anglican Church, Ondo</string>
+    <string name="package_name">com.stmarys.ondo</string>
+    <string name="custom_url_scheme">com.stmarys.ondo</string>
+</resources>

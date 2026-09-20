@@ -28,3 +28,13 @@ STMARY_UPLOAD_DIR=/tmp/stmarys-uploads
 ```
 
 The free service can sleep and its local SQLite database may reset after a restart, so it is for testing only. Events automatically disappear from the public site 24 hours after their scheduled date and time. Upgrade to persistent SQL storage when the church needs reliable accounts.
+
+## Android app
+
+The Capacitor Android project is in `android/` and loads the live website at `https://stmarys-ondo.onrender.com`. Install Android Studio with the Android SDK and a Java JDK, then run:
+
+```text
+npm run android:build
+```
+
+The debug APK will be at `android/app/build/outputs/apk/debug/app-debug.apk`. Install it on an Android phone for testing. A Play Store release needs a signed release keystore and Google Play Developer account.
